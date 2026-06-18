@@ -2,10 +2,10 @@ import sqlite3
 import os
 
 class Database():
-    def __init__(self):
+    def __init__(self, path):
         self.conn = None
         try:
-            self.conn = sqlite3.connect(r"C:\Users\User\Documents\db_folder\users.db")
+            self.conn = sqlite3.connect(path)
             print("БД подключена")
         except:
             print("Ошибка подключения к БД")
