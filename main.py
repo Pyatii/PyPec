@@ -6,9 +6,10 @@ import json
 import os
 from hashlib import sha256
 from test import Database
+from tkinter import filedialog
 
 
-db = Database()
+
 
 root = tk.Tk()
 root.title("СУБД")
@@ -37,17 +38,29 @@ def spawn_new_window(columns, headings):
     for i in columns:
         table.insert("", tk.END, values=i)
 
+def open_file():
+    global db
+
+    filepath = filedialog.askopenfilename(
+        title="Выбрать файл",
+        filetypes=[("Database", "*.db"), ("SQLite", "*.sqlite")]
+    )
+    if filepath:
+        db = Database(filepath)
+
 
 
 
 
 
 frame_buttons = tk.Frame(root)
+open_f = tk.Button(frame_buttons, text = "Open", command = open_file)
+open_f.pack(side = tk.LEFT, padx=5)
 btn_run = tk.Button(frame_buttons, text = "Run", command = Run)
 btn_run.pack(side = tk.LEFT, padx=5)
 btn_clear = tk.Button(frame_buttons, text = "Clear", command = Clr)
 btn_clear.pack(side = tk.LEFT, padx=5)
-frame_buttons.pack()
+frame_buttons.pack(fill = tk.X)
 
 txt_input = tk.Text(root)
 txt_input.pack()
